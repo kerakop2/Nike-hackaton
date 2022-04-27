@@ -47,9 +47,6 @@ export default function ProductCard({ item }) {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Link to={`/details/${item.id}`}>
-        <CardHeader title={item.name} subheader={`${item.price} $`} />
-      </Link>
       <CardMedia
         className="product-card-image"
         component="img"
@@ -57,13 +54,12 @@ export default function ProductCard({ item }) {
         image={item.image}
         alt={item.name}
       />
+      <Link to={`/details/${item.id}`}>
+        <CardHeader title={item.name} subheader={item.description} />
+      </Link>
       <CardContent>
-        <Typography
-          className="product-card-description"
-          variant="body2"
-          color="text.secondary"
-        >
-          {item.description}
+        <Typography className="product-card-description">
+          {`${item.price} $`}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

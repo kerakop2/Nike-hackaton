@@ -29,10 +29,10 @@ a {
   object-fit: contain !important;
 }
 
-.product-card-description {
+/* .product-card-description {
   height: 40px;
   overflow: hidden;
-}
+} */
 
 .product-card-collapse {
   position: relative;
@@ -51,11 +51,20 @@ a {
 }
 
 .appbar {
-  background-color: none !important;
+  background: none !important;
 }
 
 .css-19r6kue-MuiContainer-root {
-  background: rgb(97, 97, 97) !important;
+  background: rgb(219, 218, 218) !important;
+  height: 50px !important;
+}
+
+.css-2s90m6-MuiAvatar-root {
+  margin-bottom: 10px !important;
+}
+
+.css-1t6c9ts {
+  margin-top: -10px !important;
 }
 
 .product-details {

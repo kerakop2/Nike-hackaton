@@ -1,5 +1,12 @@
 import axios from "axios";
-import React, { useReducer, useState } from "react";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import React, { useEffect, useReducer, useState } from "react";
+import { auth } from "../firebase";
 import { API } from "../helpers/const";
 
 export const clientContext = React.createContext();
@@ -11,6 +18,7 @@ const initState = {
     : 0,
   myCart: null,
   productDetails: null,
+  user: null,
 };
 
 const reducer = (state = initState, action) => {
@@ -25,6 +33,8 @@ const reducer = (state = initState, action) => {
       return { ...state, myCart: action.payload };
     case "GET_PRODUCT_DETAILS":
       return { ...state, productDetails: action.payload };
+    case "CHECK_USER":
+      return { ...state, user: action.payload };
     default:
       return state;
   }
@@ -42,15 +52,31 @@ const ClientContext = (props) => {
     dispatch(action);
   };
 
+  // const productsPerPage = 3;
+  // const [currentPage, setCurrentPage] = useState(1);
+
+  // const indexOfLastproduct = currentPage * productsPerPage;
+  // // const indexOfFirstproduct = indexOfLastproduct - productsPerPage;
+  // const indexOfFirstproduct = 0;
+  // const products = state.products.slice(
+  //   indexOfFirstproduct,
+  //   indexOfLastproduct
+  // );
+  // const totalCount = state.products.length;
+
+  // const handlePagination = (page) => {
+  //   // setCurrentPage(page);
+  //   setCurrentPage(currentPage + 1);
+  // };
+
   const productsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const indexOfLastproduct = currentPage * productsPerPage;
-  // const indexOfFirstproduct = indexOfLastproduct - productsPerPage;
-  const indexOfFirstproduct = 0;
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = 0;
   const products = state.products.slice(
-    indexOfFirstproduct,
-    indexOfLastproduct
+    indexOfFirstProduct,
+    indexOfLastProduct
   );
   const totalCount = state.products.length;
 
@@ -155,20 +181,44 @@ const ClientContext = (props) => {
     dispatch(action);
   };
 
+  const authWidthGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+  };
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      const action = {
+        type: "CHECK_USER",
+        payload: user,
+      };
+      dispatch(action);
+    });
+  }, []);
+
+  const logOut = () => {
+    signOut(auth);
+  };
+
   return (
     <clientContext.Provider
       value={{
         getProducts: getProducts,
         handlePagination: handlePagination,
-        getProductDetails: getProductDetails,
         addProductToCart: addProductToCart,
         checkProductInCart: checkProductInCart,
         deleteProductInCart: deleteProductInCart,
         getProductsFromCart: getProductsFromCart,
         changeCountProductInCart: changeCountProductInCart,
+        getProductDetails: getProductDetails,
+        authWidthGoogle: authWidthGoogle,
+        logOut: logOut,
         products: state.products,
+        totalCount: totalCount,
+        productsPerPage: productsPerPage,
         cartCount: state.cartCount,
+        myCart: state.myCart,
         productDetails: state.productDetails,
+        user: state.user,
       }}
     >
       {props.children}

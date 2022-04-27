@@ -14,11 +14,16 @@ import MenuItem from "@mui/material/MenuItem";
 import { ThemeProvider } from "styled-components";
 import { Link } from "react-router-dom";
 import logonike from "../assets/logonike.png";
+import { Badge } from "@mui/material";
+import { Logout, ShoppingCart } from "@mui/icons-material";
+import { clientContext } from "../context/ClientContext";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {
+  const data = React.useContext(clientContext);
+  const { cartCount, authWidthGoogle, user, logOut } = data;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -84,12 +89,16 @@ const ResponsiveAppBar = () => {
             >
               <Link to="/admin-panel">
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Admin Panel</Typography>
+                  <Typography color="black" textAlign="center">
+                    Admin Panel
+                  </Typography>
                 </MenuItem>
               </Link>
               <Link to="/admin-panel/add">
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Add Product</Typography>
+                  <Typography color="black" textAlign="center">
+                    Add Product
+                  </Typography>
                 </MenuItem>
               </Link>
             </Menu>
@@ -107,22 +116,53 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Link to="/admin-panel">
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
                 ADMIN PANEl
               </Button>
             </Link>
             <Link to="/admin-panel/add">
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Button sx={{ my: 2, color: "black", display: "block" }}>
                 ADD PRODUCT
               </Button>
             </Link>
           </Box>
+          <Box
+            style={{ display: "flex", alignItems: "center" }}
+            sx={{ flexGrow: 0 }}
+          >
+            <Link to="/cart" style={{ marginRight: 10 }}>
+              <Badge badgeContent={cartCount} color="error">
+                <ShoppingCart />
+              </Badge>
+            </Link>
+            {user ? (
+              <>
+                <Avatar
+                  src={user.photoURL}
+                  alt={user.displayName}
+                  style={{ marginRight: 10 }}
+                />
+                <span>{user.email}</span>
+                <Button onClick={logOut}>
+                  <Logout color="error" />
+                </Button>
+              </>
+            ) : (
+              <Button
+                onClick={authWidthGoogle}
+                variant="outlined"
+                color="error"
+              >
+                Войти
+              </Button>
+            )}
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -141,7 +181,9 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Add Panel</Typography>
+                  <Typography textAlign="center" color="black">
+                    Add Panel
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

@@ -37,13 +37,6 @@ const FiltersBlock = ({ getProducts }) => {
 
   return (
     <div className="filters-block">
-      <TextField
-        variant="standard"
-        value={searchValue}
-        onChange={(e) => handleFilters("q", e.target.value)}
-        type="search"
-        label="Живой поиск..."
-      />
       <FormControl variant="standard">
         <InputLabel id="color-label">Выберите цвет</InputLabel>
         <Select
@@ -68,14 +61,24 @@ const FiltersBlock = ({ getProducts }) => {
           label="Выберите размер"
           labelId="size-label"
         >
-          <MenuItem value="s">SMALL</MenuItem>
-          <MenuItem value="m">MIDDLE</MenuItem>
-          <MenuItem value="l">LARGE</MenuItem>
-          <MenuItem value="xl">EXTRA LARGE</MenuItem>
-          <MenuItem value="xxl">XX LARGE</MenuItem>
+          <MenuItem value="36">36</MenuItem>
+          <MenuItem value="37">37</MenuItem>
+          <MenuItem value="38">38</MenuItem>
+          <MenuItem value="39">39</MenuItem>
+          <MenuItem value="40">40</MenuItem>
+          <MenuItem value="41">41</MenuItem>
+          <MenuItem value="42">42</MenuItem>
         </Select>
       </FormControl>
-      <Button variant="outlined" color="primary" onClick={resetFilter}>
+      <TextField
+        variant="standard"
+        value={searchValue}
+        onChange={(e) => handleFilters("q", e.target.value)}
+        color="info"
+        type="search"
+        label="Живой поиск..."
+      />
+      <Button variant="text" color="inherit" onClick={resetFilter}>
         Сбросить
       </Button>
     </div>

@@ -15,8 +15,6 @@ const CartPage = () => {
   const data = React.useContext(clientContext);
   const { getProductsFromCart, myCart, changeCountProductInCart } = data;
 
-  console.log(myCart);
-
   useEffect(() => {
     getProductsFromCart();
   }, []);

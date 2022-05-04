@@ -74,9 +74,7 @@ export default function ProductCard({ item }) {
           <FavoriteIcon color={liked ? "error" : "inherit"} />
           <span>{item.likes}</span>
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+
         {checkProductInCart(item.id) ? (
           <IconButton onClick={() => deleteProductInCart(item.id)}>
             <ShoppingCart color="error" />
@@ -86,26 +84,7 @@ export default function ProductCard({ item }) {
             <ShoppingCart color="inherit" />
           </IconButton>
         )}
-
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
       </CardActions>
-      <Collapse
-        className="product-card-collapse"
-        in={expanded}
-        timeout="auto"
-        unmountOnExit
-      >
-        <CardContent>
-          <Typography paragraph>{item.description}</Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }

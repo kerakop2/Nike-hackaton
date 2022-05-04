@@ -17,6 +17,7 @@ import logonike from "../assets/logonike.png";
 import { Badge } from "@mui/material";
 import { Logout, ShoppingCart } from "@mui/icons-material";
 import { clientContext } from "../context/ClientContext";
+import ShopIcon from "@mui/icons-material/Shop";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -54,7 +55,7 @@ const ResponsiveAppBar = () => {
             color="black"
           >
             <Link to="/">
-              <img width={50} src={logonike} alt="" />
+              <img className="logo" width={50} src={logonike} alt="" />
             </Link>
           </Typography>
 
@@ -132,7 +133,7 @@ const ResponsiveAppBar = () => {
           >
             <Link to="/cart" style={{ marginRight: 10 }}>
               <Badge badgeContent={cartCount} color="error">
-                <ShoppingCart />
+                <ShopIcon color="action" sx={{ fontSize: 30 }} />
               </Badge>
             </Link>
             {user ? (
@@ -140,29 +141,22 @@ const ResponsiveAppBar = () => {
                 <Avatar
                   src={user.photoURL}
                   alt={user.displayName}
-                  style={{ marginRight: 10 }}
+                  style={{ marginRight: 10, marginBottom: 10 }}
                 />
-                <span>{user.email}</span>
-                <Button onClick={logOut}>
-                  <Logout color="error" />
+                <span style={{ marginBottom: 10, color: "black" }}>
+                  {user.email}
+                </span>
+                <Button style={{ marginBottom: 10 }} onClick={logOut}>
+                  <Logout color="action" />
                 </Button>
               </>
             ) : (
-              <Button
-                onClick={authWidthGoogle}
-                variant="outlined"
-                color="error"
-              >
-                Войти
+              <Button onClick={authWidthGoogle} variant="text" color="inherit">
+                Log in
               </Button>
             )}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip> */}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

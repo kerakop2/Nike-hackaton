@@ -1,4 +1,3 @@
-// начало 1
 import React, { useState } from "react";
 import {
   TextField,
@@ -25,10 +24,8 @@ const AddProductPage = () => {
   });
 
   const handleSubmit = (event) => {
-    // не обновляет страницу
     event.preventDefault();
 
-    // не добавляет пустые строки || не пропускает пустые строки
     for (let key in newProduct) {
       let value = newProduct[key];
       if (typeof value === "string") {
@@ -38,11 +35,7 @@ const AddProductPage = () => {
         }
       }
     }
-
-    // Добавляет в database
     addProduct(newProduct);
-
-    // очищаем инпуты
     setNewProduct({
       name: "",
       description: "",

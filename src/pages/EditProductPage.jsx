@@ -21,10 +21,8 @@ const EditProductPage = () => {
   const [editedProduct, setEditedProduct] = useState(productToEdit);
 
   const handleSubmit = (event) => {
-    // не обновляет страницу
     event.preventDefault();
 
-    // не добавляет пустые строки || не пропускает пустые строки
     for (let key in editedProduct) {
       let value = editedProduct[key];
       if (typeof value === "string") {

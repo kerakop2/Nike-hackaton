@@ -7,8 +7,6 @@ const AdminPage = () => {
   const data = React.useContext(adminContext);
   const { getProducts, products } = data;
 
-  console.log(products);
-
   useEffect(() => {
     getProducts();
   }, []);

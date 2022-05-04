@@ -52,23 +52,6 @@ const ClientContext = (props) => {
     dispatch(action);
   };
 
-  // const productsPerPage = 3;
-  // const [currentPage, setCurrentPage] = useState(1);
-
-  // const indexOfLastproduct = currentPage * productsPerPage;
-  // // const indexOfFirstproduct = indexOfLastproduct - productsPerPage;
-  // const indexOfFirstproduct = 0;
-  // const products = state.products.slice(
-  //   indexOfFirstproduct,
-  //   indexOfLastproduct
-  // );
-  // const totalCount = state.products.length;
-
-  // const handlePagination = (page) => {
-  //   // setCurrentPage(page);
-  //   setCurrentPage(currentPage + 1);
-  // };
-
   const productsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -81,8 +64,8 @@ const ClientContext = (props) => {
   const totalCount = state.products.length;
 
   const handlePagination = (page) => {
-    // setCurrentPage(page);
-    setCurrentPage(currentPage + 1);
+    setCurrentPage(page);
+    // setCurrentPage(currentPage + 1);
   };
 
   const addProductToCart = (product) => {
@@ -172,15 +155,6 @@ const ClientContext = (props) => {
     getProductsFromCart();
   };
 
-  const getProductDetails = async (id) => {
-    const response = await axios(`${API}/${id}`);
-    const action = {
-      type: "GET_PRODUCT_DETAILS",
-      payload: response.data,
-    };
-    dispatch(action);
-  };
-
   const authWidthGoogle = async () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
@@ -199,6 +173,29 @@ const ClientContext = (props) => {
     signOut(auth);
   };
 
+  const likeCounter = async (id, count) => {
+    await axios.patch(`${API}/${id}`, { likes: count + 1 });
+    getProducts();
+  };
+  const getProductDetails = async (id) => {
+    const response = await axios(`${API}/${id}`);
+    const action = {
+      type: "GET_PRODUCT_DETAILS",
+      payload: response.data,
+    };
+    dispatch(action);
+  };
+
+  const addFeedback = async (newFeedback, product) => {
+    if (product.feedBacks) {
+      product.feedBacks.push(newFeedback);
+      await axios.patch(`${API}/${product.id}`, product);
+    } else {
+      product.feedBacks = [newFeedback];
+      await axios.patch(`${API}/${product.id}`, product);
+    }
+  };
+
   return (
     <clientContext.Provider
       value={{
@@ -209,9 +206,11 @@ const ClientContext = (props) => {
         deleteProductInCart: deleteProductInCart,
         getProductsFromCart: getProductsFromCart,
         changeCountProductInCart: changeCountProductInCart,
+        likeCounter: likeCounter,
         getProductDetails: getProductDetails,
         authWidthGoogle: authWidthGoogle,
         logOut: logOut,
+        addFeedback: addFeedback,
         products: state.products,
         totalCount: totalCount,
         productsPerPage: productsPerPage,

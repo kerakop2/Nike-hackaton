@@ -7,6 +7,7 @@ import CartPage from "./pages/CartPage";
 import EditProductPage from "./pages/EditProductPage";
 import MainPage from "./pages/MainPage";
 import ProductDetalisPage from "./pages/ProductDetailsPage";
+import ProductPage from "./pages/ProductPage";
 
 const Navigation = () => {
   return (
@@ -19,6 +20,7 @@ const Navigation = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/details/:id" element={<ProductDetalisPage />} />
+        <Route path="/products" element={<ProductPage />} />
       </Routes>
     </BrowserRouter>
   );

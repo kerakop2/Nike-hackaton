@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -26,13 +28,8 @@ a {
 }
 
 .product-card-image {
-  object-fit: contain !important;
+  /* object-fit: contain !important; */
 }
-
-/* .product-card-description {
-  height: 40px;
-  overflow: hidden;
-} */
 
 .product-card-collapse {
   position: relative;
@@ -46,16 +43,24 @@ a {
   align-items: center;
 }
 
+.css-1nrlq1o-MuiFormControl-root {
+  margin-bottom: 40px;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  margin-bottom: 40px;
+}
+
 .filters-block button {
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .appbar {
   background: none !important;
+  background: rgb(219, 218, 218) !important;
 }
 
 .css-19r6kue-MuiContainer-root {
-  background: rgb(219, 218, 218) !important;
   height: 50px !important;
 }
 
@@ -85,6 +90,7 @@ a {
 .product-details li {
   margin: 10px 5px;
   font-size: 20px;
+  text-decoration: none;
 }
 
 .product-details li strong {
@@ -96,4 +102,95 @@ a {
   font-size: 40px;
   margin-top: 0;
   margin-left: 43px;
+}
+.product-details-feedback h3 {
+  font-size: 25px;
+  text-align: center;
+}
+
+.product-details-feedback form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.product-details-feedback > div {
+  max-width: 750px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.feedback {
+  background-color: rgb(214, 214, 214);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.feedback h5 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.navbar {
+  height: 50px !important;
+  width: 100% !important;
+  /* background: rgb(219, 218, 218); */
+}
+
+.css-1oqqzyl-MuiContainer-root {
+  max-width: 1500px !important;
+}
+
+.filters-block-2 {
+  max-width: 1200px;
+}
+
+.main img {
+  margin-top: 20px;
+}
+
+.css-1y942vo-MuiButtonBase-root-MuiButton-root {
+  color: black !important;
+  margin-bottom: 5px !important;
+}
+
+.logo {
+  vertical-align: none;
+}
+
+.img {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 1200px;
+  height: 1000px;
+  object-fit: cover;
+}
+
+.image {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.footer {
+  height: 300px;
+  background: black;
+}
+
+.footer-word {
+  font-family: "Bebas Neue" cursive;
+  padding-top: 30px;
+  margin-top: 40px;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-word li {
+  list-style-type: none;
+  margin: 5px 0px;
 }
